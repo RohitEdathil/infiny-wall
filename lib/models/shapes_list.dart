@@ -16,8 +16,7 @@ class ShapesList extends ChangeNotifier {
     });
   }
 
-  void updateLastCurve(Offset offset) {
-    this.shapes.last.data.add(offset);
+  void refresh() {
     this._redo.clear();
     notifyListeners();
   }

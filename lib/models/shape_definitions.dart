@@ -35,8 +35,21 @@ class Stroke extends Shape {
   }
 }
 
-class Point {
-  double x;
-  double y;
-  Point({this.x, this.y});
+class Line extends Shape {
+  List<Offset> data = [];
+  Color color;
+  double size;
+  Line({Offset initial, this.color, this.size}) {
+    data.add(initial);
+    data.add(initial);
+  }
+  Paint paint = Paint();
+  @override
+  void render(Canvas canvas) {
+    paint.color = color;
+    paint.strokeWidth = size;
+    canvas.drawLine(data[0], data[1], paint);
+    canvas.drawCircle(data[0], size / 2, paint);
+    canvas.drawCircle(data[1], size / 2, paint);
+  }
 }

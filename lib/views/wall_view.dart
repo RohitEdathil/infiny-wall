@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:infiny_wall/models/brush.dart';
 import 'package:infiny_wall/models/shapes_list.dart';
+import 'package:infiny_wall/tools/brush_tool.dart';
+import 'package:infiny_wall/tools/tool.dart';
 import 'package:infiny_wall/ux_components/palette.dart';
 import 'package:infiny_wall/ux_components/wall.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +18,10 @@ class WallView extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => ShapesList(shapes: []),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ToolHolder(BrushTool()),
+        ),
       ],
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,

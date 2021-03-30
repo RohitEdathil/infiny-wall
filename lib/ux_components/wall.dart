@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:infiny_wall/models/brush.dart';
-import 'package:infiny_wall/models/shape_definitions.dart';
 import 'package:infiny_wall/models/shapes_list.dart';
+import 'package:infiny_wall/tools/tool.dart';
 import 'package:provider/provider.dart';
 
 class Wall extends StatelessWidget {
@@ -12,14 +12,19 @@ class Wall extends StatelessWidget {
         builder: (context, constraints) {
           return GestureDetector(
             onPanStart: (details) {
-              Provider.of<ShapesList>(context, listen: false).addShape(Stroke(
-                  initial: details.localPosition,
-                  color: Provider.of<Brush>(context, listen: false).color,
-                  size: Provider.of<Brush>(context, listen: false).size));
+              Provider.of<ToolHolder>(context, listen: false)
+                  .currentTool
+                  .start(details.localPosition, context);
             },
             onPanUpdate: (details) {
-              Provider.of<ShapesList>(context, listen: false)
-                  .updateLastCurve(details.localPosition);
+              Provider.of<ToolHolder>(context, listen: false)
+                  .currentTool
+                  .update(details.localPosition, context);
+            },
+            onPanEnd: (details) {
+              Provider.of<ToolHolder>(context, listen: false)
+                  .currentTool
+                  .end(context);
             },
             child: CustomPaint(
               size: Size(constraints.maxWidth, constraints.maxHeight),

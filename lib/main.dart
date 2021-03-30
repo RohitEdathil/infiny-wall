@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:infiny_wall/views/wall_view.dart';
 
 void main() {
@@ -8,6 +9,8 @@ void main() {
 class InfinyWall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
