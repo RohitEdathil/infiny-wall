@@ -13,6 +13,7 @@ class Stroke extends Shape {
     data.add(initial);
   }
   Paint paint = Paint();
+
   @override
   void render(Canvas canvas) {
     paint.color = color;
@@ -51,5 +52,35 @@ class Line extends Shape {
     canvas.drawLine(data[0], data[1], paint);
     canvas.drawCircle(data[0], size / 2, paint);
     canvas.drawCircle(data[1], size / 2, paint);
+  }
+}
+
+class ClosedPath extends Shape {
+  List<Offset> data = [];
+  Color color;
+  double size;
+  ClosedPath({Offset initial, this.color, this.size}) {
+    data.add(initial);
+  }
+  Paint paint = Paint();
+  @override
+  void render(Canvas canvas) {
+    paint.color = color;
+
+    if (data.length > 1) {
+      paint.strokeWidth = size;
+      paint.style = PaintingStyle.fill;
+      Path path = Path();
+      path.moveTo(data[0].dx, data[0].dy);
+      for (var i = 1; i < data.length; i++) {
+        path.quadraticBezierTo(
+            data[i - 1].dx, data[i - 1].dy, data[i].dx, data[i].dy);
+      }
+
+      path.close();
+      canvas.drawPath(path, paint);
+    } else {
+      canvas.drawCircle(data[0], size / 2, paint);
+    }
   }
 }

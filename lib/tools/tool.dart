@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:infiny_wall/tools/brush_tool.dart';
+import 'package:infiny_wall/tools/closed_path_tool.dart';
 import 'package:infiny_wall/tools/line_tool.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +10,7 @@ import 'package:provider/provider.dart';
 final registeredTools = <Tool>[
   BrushTool(),
   LineTool(),
+  ClosedPathTool(),
 ];
 
 class ToolHolder extends ChangeNotifier {

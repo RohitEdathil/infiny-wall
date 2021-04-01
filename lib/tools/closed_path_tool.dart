@@ -5,10 +5,10 @@ import 'package:infiny_wall/models/shapes_list.dart';
 import 'package:infiny_wall/tools/tool.dart';
 import 'package:provider/provider.dart';
 
-class BrushTool extends Tool {
+class ClosedPathTool extends Tool {
   @override
   void start(Offset offset, BuildContext context) {
-    Provider.of<ShapesList>(context, listen: false).addShape(Stroke(
+    Provider.of<ShapesList>(context, listen: false).addShape(ClosedPath(
         initial: offset,
         color: Provider.of<Brush>(context, listen: false).color,
         size: Provider.of<Brush>(context, listen: false).size));
@@ -30,6 +30,6 @@ class BrushTool extends Tool {
   }
   @override
   Widget build(BuildContext context) {
-    return renderButton(context, Icons.gesture_rounded);
+    return renderButton(context, Icons.brush_rounded);
   }
 }
